@@ -1,0 +1,299 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeFile="~/Menu_TU/Site_TU.master.vb" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Sistem Informasi Gereja HKBP</title>
+        <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+        table
+        {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+        table th
+        {
+            background-color: #b2acac;
+            color: #333;
+            font-weight: bold;
+        }
+        table th, table td
+        {
+            padding: 5px;
+            border: 1px;
+        }
+        table img
+        {
+            height: 145px;
+            width: 130px;
+            cursor: pointer;
+        }
+        table wallpaper
+        {
+            height: 145px;
+            width: 130px;
+            cursor: pointer;
+        }
+        #dialog img
+        {
+            height: 550px;
+            width: 575px;
+            cursor: pointer;
+        }
+        
+        .form-prime {
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+        .form-prime:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+
+
+        .btn-prime {
+        color: #ffffff;
+        background-color: #428bca;
+        border-color: #357ebd;
+        }
+
+        .btn-prime:hover,
+        .btn-prime:focus,
+        .btn-prime:active,
+        .btn-prime.active,
+        .open .dropdown-toggle.btn-prime {
+        color: #ffffff;
+        background-color: #3276b1;
+        border-color: #285e8e;
+        }
+
+        .btn-prime:active,
+        .btn-prime.active,
+        .open .dropdown-toggle.btn-prime {
+        background-image: none;
+        }
+    </style>   
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <%--<a class="navbar-brand" runat="server" href="~/Index.aspx">SIGRA</a>--%>
+                    <div style="margin-top:9px; color:#fff">
+                    <asp:GridView ID="gvbrand" runat="server" AutoGenerateColumns="false" DataKeyNames="id_gereja" BackColor="Transparent" BorderColor="Transparent" ShowHeader="false" ControlStyle-Font-Size="medium">
+                <Columns>   
+                    <asp:TemplateField HeaderText="Nama gereja">
+                        <ItemTemplate>
+                            <asp:Label ID="lblbrand" runat="server" Text='<%# Eval("Nama_gereja ")%>'></asp:Label><br />
+                            <%--<asp:Label ID="lblnama" runat="server" Text='<%# If(Eval("Nama_gereja").ToString().Length < 100, "Gereja " + Eval("Nama_gereja").ToString().Substring(0, 100), Eval("Nama_gereja"))%>' Font-Bold="true"></asp:Label> <br />--%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <PagerStyle BorderStyle="None" />      
+            </asp:GridView>
+                        </div>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <%--<ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/About">About</a></li>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                    </ul>--%>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Menu_TU/Index_TU.aspx">Beranda</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jemaat <b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_PendataanJemaat.aspx">Pendataan Jemaat</a></li>
+                                        </li>
+                                          <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Jemaatbaru.aspx">Jemaat Baru</a></li>
+                                        </li>
+                                          <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Baptis.aspx">Jemaat Baptis</a></li>
+                                        </li>
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Sidi.aspx">Jemaat Sidi</a></li>
+                                        </li>
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Pindah.aspx">Jemaat Pindah</a></li>
+                                        </li>
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Pernikahan.aspx">Pernikahan Jemaat</a></li>
+                                        </li>
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jemaat_Anak_Lahir.aspx">Anak Lahir</a></li>
+                                        </li>
+                                      </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Keuangan <b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                               <li><a runat="server" href="~/Menu_TU/keuangan_pemasukan.aspx">Penerimaan</a></li>
+                                        </li>
+                                        <li>
+                                               <li><a runat="server" href="~/Menu_TU/keuangan_pengeluaran.aspx">Pengeluaran</a></li>
+                                        </li>
+                                      </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Statistik <b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                               <li><a runat="server" href="~/Menu_TU/statistik_keuangan">Keuangan</a></li>
+                                        </li>
+                                        <li>
+                                               <li><a runat="server" href="~/Menu_TU/statistik_jemaat">Jemaat</a></li>
+                                        </li>
+                                      </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lainnya<b class="caret"></b></a>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Jadwal_ibadah.aspx">Jadwal Ibadah</a></li>
+                                               
+                                        </li>
+                                        <li>
+                                            <li><a runat="server" href="~/Menu_TU/Pengumuman.aspx">Pengumuman</a></li>   
+                                        </li>
+                                          <li>
+                                            <li><a runat="server" href="~/Menu_TU/Kegiatan.aspx">Kegiatan</a></li>   
+                                        </li>
+                                      </ul>
+                                </li>
+                                <li><a runat="server" href="~/Menu_TU/Tentang.aspx">Tentang</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                                      <ul class="dropdown-menu">
+                                           <li>
+                                             <asp:hyperlink Text="Profil" ID="profil" href="Profil.aspx" runat="server"></asp:hyperlink>
+                                        </li>
+                                        <li>
+                                             <asp:hyperlink Text="Logout" ID="logout" href="logout.aspx" runat="server"></asp:hyperlink>
+                                        </li>       
+                                      </ul>
+                                </li>
+                               <%-- <li><a href="#"><i class="fa fa-user"></i></a></li>--%>
+                            </ul>
+                        </AnonymousTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+
+         <div class="container body-content">
+             <div style="min-height:90vh">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+                  </div>
+            
+            <%------------------------ FOOTER ------------------------%>
+            
+             
+             <footer>
+                <div Class="row ">
+                    
+
+                    
+<hr />
+        <div Class="col-md-4">
+        <%--<asp:GridView ID="gv1" runat="server" AutoGenerateColumns="false" ShowHeader="false" BorderStyle="none">
+        <Columns>
+            <asp:ImageField DataImageUrlField="Path" HeaderText="Logo" />
+        </Columns>
+        </asp:GridView>--%>
+            <asp:GridView ID="gvtentang" runat="server" AutoGenerateColumns="false" DataKeyNames="id_gereja" BackColor="Transparent" BorderColor="Transparent" ShowHeader="false" ControlStyle-Font-Size="medium">
+                <Columns>   
+                    <asp:TemplateField HeaderText="Nama Ibadah">
+                        <ItemTemplate>
+                            <asp:Label ID="lbl1" runat="server" Text='<%# "Gereja " + Eval("Nama_Gereja")%>'></asp:Label><br />
+                            <asp:Label ID="Label2" runat="server" Text='<%#"Distrik " + Eval("Distrik_Gereja")%>'></asp:Label><br />
+                            <asp:Label ID="lbl2" runat="server" Text='<%# Eval("alamat_Gereja ")%>'></asp:Label><br />
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("no_telepon_gereja ")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <PagerStyle BorderStyle="None" />      
+            </asp:GridView>
+            </div>
+      
+                  <div Class="col-md-4">
+                      
+                  </div> 
+               <div Class="col-md-4">
+                   <br />
+                   
+
+
+                   </div>
+   </div>
+                 
+
+
+            
+        </footer>
+                 
+        </div>
+    </form>
+</body>
+</html>
